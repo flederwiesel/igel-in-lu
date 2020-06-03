@@ -143,7 +143,9 @@ function initMap()
 				div += desc;
 			}
 
-			div += "<div style = 'margin-top: 0.5em'><img src='img/" + marker + ".png'></div>";
+			if (marker)
+				div += "<div style = 'margin-top: 0.5em'><img src='img/" + marker + ".png'></div>";
+
 			div += "</div>";
 
 			infowindow.setContent(div);
