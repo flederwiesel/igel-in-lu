@@ -82,15 +82,15 @@ function initMap()
 		{
 			switch (feature.getProperty("condition"))
 			{
-			case "healthy":
+			case "HEALTHY":
 				return { icon: "img/pins/green.png" };
 				break;
 
-			case "needy":
+			case "NEEDY":
 				return { icon: "img/pins/yellow.png" };
 				break;
 
-			case "dead":
+			case "DEAD":
 				return { icon: "img/pins/red.png" };
 				break;
 
@@ -116,11 +116,11 @@ function initMap()
 
 			switch (gender)
 			{
-			case "male":
+			case "MALE":
 				gender = "<span style = 'margin-left: 1em'>&#x2642;</span>";
 				break;
 
-			case "female":
+			case "FEMALE":
 				gender = "<span style = 'margin-left: 1em'>&#x2640;</span>";
 				break;
 

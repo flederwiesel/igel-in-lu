@@ -29,13 +29,13 @@ SELECT 'f0ff' INTO @cya;
 SELECT 'ff9f' INTO @pin;
 SELECT 'f000' INTO @blk;
 
-SELECT 0 INTO @h;
-SELECT 1 INTO @n;
-SELECT 2 INTO @d;
+SELECT 'HEALTHY' INTO @h;
+SELECT   'NEEDY' INTO @n;
+SELECT    'DEAD' INTO @d;
 
-SELECT -1 INTO @u;
-SELECT  0 INTO @f;
-SELECT  1 INTO @m;
+SELECT 'UNKNOWN' INTO @u;
+SELECT  'FEMALE' INTO @f;
+SELECT    'MALE' INTO @m;
 
 
 -- https://stackoverflow.com/questions/5510052/changing-the-connection-timezone-in-mysql
@@ -45,14 +45,7 @@ SET time_zone = 'Europe/Berlin';
 CREATE TABLE `hedgehogs`
 (
 	`id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	`gender` /*
-		abstract class Gender
-		{
-			const UNKNOWN = -1;
-			const FEMALE  =  0;
-			const MALE    =  1;
-		}
-	*/ INTEGER DEFAULT -1,
+	`gender` ENUM ('UNKNOWN', 'FEMALE', 'MALE') DEFAULT 'UNKNOWN',
 	`parent` INTEGER DEFAULT NULL,
 	`marker-1` VARCHAR(4) DEFAULT '0000',
 	`marker-2` VARCHAR(4) DEFAULT '0000',
@@ -67,15 +60,7 @@ CREATE TABLE `discoveries`
 	`lat` REAL NOT NULL,
 	`lon` REAL NOT NULL,
 	`hedgehog` INTEGER,
-	`condition` /*
-		abstract class Condition
-		{
-			const UNKNOWN = -1;
-			const HEALTHY =  0;
-			const NEEDY   =  1;
-			const DEAD    =  2;
-		}
-	*/ INTEGER DEFAULT -1,
+	`condition` ENUM ('UNKNOWN', 'HEALTHY', 'NEEDY', 'DEAD') DEFAULT 'UNKNOWN',
 	`notes` TEXT,
 	FOREIGN KEY(`hedgehog`) REFERENCES `hedgehogs`(`id`)
 );
@@ -323,33 +308,6 @@ EOF
 while read timestamp lat lon condition dnotes gender birth marker hnotes
 do
 	timestamp=$(date -d @$timestamp +'%Y-%m-%dT%H:%M%z')
-
-	case $condition in
-	-1)
-		condition=unknown
-		;;
-	0)
-		condition=healthy
-		;;
-	1)
-		condition=needy
-		;;
-	2)
-		condition=dead
-		;;
-	esac
-
-	case $gender in
-	-1)
-		gender=unknown
-		;;
-	0)
-		gender=female
-		;;
-	1)
-		gender=male
-		;;
-	esac
 
 	img="img/$marker.png"
 
