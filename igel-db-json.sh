@@ -375,7 +375,8 @@ SELECT
 	`hedgehogs`.`notes`
 FROM
 	`discoveries`
-	LEFT JOIN hedgehogs ON hedgehogs.id = discoveries.hedgehog;
+	LEFT JOIN hedgehogs ON hedgehogs.id = discoveries.hedgehog
+ORDER BY `discoveries`.`id`;
 EOF
 )
 
