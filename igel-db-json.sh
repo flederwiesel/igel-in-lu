@@ -51,7 +51,7 @@ CREATE TABLE `hedgehogs`
 	`marker-2` VARCHAR(4) DEFAULT '0000',
 	`birth` INTEGER,
 	`notes` VARCHAR(255)
-);
+) CHARACTER SET=utf8;
 
 CREATE TABLE `discoveries`
 (
@@ -63,7 +63,7 @@ CREATE TABLE `discoveries`
 	`condition` ENUM ('UNKNOWN', 'HEALTHY', 'NEEDY', 'DEAD') DEFAULT 'UNKNOWN',
 	`notes` TEXT,
 	FOREIGN KEY(`hedgehog`) REFERENCES `hedgehogs`(`id`)
-);
+) CHARACTER SET=utf8;
 
 INSERT INTO `hedgehogs`(`id`, `parent`, `gender`, `marker-1`, `marker-2`, `birth`, `notes`)
 VALUES
