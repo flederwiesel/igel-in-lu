@@ -173,8 +173,8 @@ function resizeMap()
 	var header = document.querySelector('#header');
 	var mapdiv = document.querySelector('#map');
 
-	if (window.innerHeight < header.offsetHeight + mapdiv.offsetHeight)
-		mapdiv.setAttribute("style", "height: " + (window.innerHeight - header.offsetHeight) + "px");
+	if (window.innerHeight != header.offsetHeight + mapdiv.offsetHeight)
+		mapdiv.style.height = (window.innerHeight - header.offsetHeight) + "px";
 }
 
 window.addEventListener("resize", resizeMap);
