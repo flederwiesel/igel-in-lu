@@ -1,6 +1,32 @@
 <?php
+
 if ("localhost" == $_SERVER["SERVER_NAME"])
 	header("Access-Control-Allow-Origin: *");
+
+/******************************************************************************
+ * detect device type
+ ******************************************************************************/
+
+$Mobile_Detect = 'd5d87b4';
+
+require_once "$_SERVER[DOCUMENT_ROOT]/lib/Mobile-Detect/$Mobile_Detect/Mobile_Detect.php";
+
+$device = new Mobile_Detect();
+
+if (!$device)
+{
+	$mobile = FALSE;
+	$tablet = FALSE;
+}
+else
+{
+	/* Treat tablets as desktop */
+	$mobile = $device->isMobile() && !$device->isTablet();
+	$tablet = $device->isTablet();
+
+	unset($device);
+}
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -9,6 +35,10 @@ if ("localhost" == $_SERVER["SERVER_NAME"])
 	<meta name="language" content="de">
 	<meta name="robots" content="noindex, nofollow">
 	<meta name="author" content="Tobias Kühne">
+<?php
+	if ($mobile && !$tablet) { ?>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0;"/>
+<?php } ?>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 	<link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
 	<link rel="icon" type="image/png" href="favicon-48.png" sizes="48x48">
