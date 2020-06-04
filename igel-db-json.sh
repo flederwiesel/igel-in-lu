@@ -6,12 +6,10 @@ cd "$scriptdir"
 
 set -e
 
-# argb
+ssh igelhilfe@igelhilfe-ludwigshafen.de \
 mysql \
-	--host=localhost \
-	--protocol=TCP \
 	--user=igelhilfe \
-	--password=$(getpass machine=mysql://localhost login=igelhilfe) \
+	--password="'$(getpass machine=mysql://localhost login=igelhilfe)'" \
 	--default-character-set=utf8 <<"EOF"
 DROP DATABASE IF EXISTS `igel-in-lu`;
 CREATE DATABASE `igel-in-lu`;
@@ -357,10 +355,10 @@ EOF
 	((++n))
 
 done < <(
+ssh igelhilfe@igelhilfe-ludwigshafen.de \
 mysql \
-	--protocol=TCP \
 	--user=igelhilfe \
-	--password=$(getpass machine=mysql://localhost login=igelhilfe) \
+	--password="'$(getpass machine=mysql://localhost login=igelhilfe)'" \
 	--database=igel-in-lu \
 	--skip-column-names <<"EOF"
 SELECT
