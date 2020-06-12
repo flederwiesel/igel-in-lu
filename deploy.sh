@@ -10,6 +10,7 @@ cd "$scriptdir"
 
 rsync -rtv \
 	--chmod=a+rw,g+rw,o+r \
+	--exclude=.git* \
 	--exclude=*.sh \
 	--exclude=*.sql \
 	--exclude=backup \
