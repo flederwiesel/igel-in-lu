@@ -105,8 +105,6 @@ function initMap()
 		}
 	);
 
-	map.data.loadGeoJson("data.json");
-
 	map.data.setStyle(
 		function(feature)
 		{
@@ -130,6 +128,13 @@ function initMap()
 			}
 		}
 	);
+
+<?php
+	$host = $_SERVER["SERVER_NAME"];
+	$path = dirname($_SERVER["SCRIPT_NAME"]);
+	$url = "https://$host$path/api/v0.1/discoveries.php";
+?>
+	map.data.loadGeoJson("<?php echo $url; ?>");
 
 	// When the user clicks, open an infowindow
 	map.data.addListener('click',
