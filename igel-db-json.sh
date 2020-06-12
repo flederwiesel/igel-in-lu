@@ -6,11 +6,7 @@ cd "$scriptdir"
 
 set -e
 
-ssh igelhilfe@igelhilfe-ludwigshafen.de \
-mysql \
-	--user=igelhilfe \
-	--password="'$(getpass machine=mysql://localhost login=igelhilfe)'" \
-	--default-character-set=utf8 <<"EOF"
+cat > hedgehogs.sql <<"EOF"
 DROP DATABASE IF EXISTS `igel-in-lu`;
 CREATE DATABASE `igel-in-lu`;
 USE `igel-in-lu`;
@@ -294,7 +290,13 @@ VALUES
 (  1, '2018-08-01 22:30', 49.508580, 8.374523, @h,  1, NULL);
 EOF
 
-###
+[ "$(uname -s)" = "Linux" ] || protocol=--protocol=TCP
+
+mysql $protocol \
+	--user=igelhilfe \
+	--password="$(getpass machine=mysql://localhost login=igelhilfe)" \
+	--default-character-set=utf8 \
+	< hedgehogs.sql
 
 (
 cat <<EOF
@@ -355,10 +357,9 @@ EOF
 	((++n))
 
 done < <(
-ssh igelhilfe@igelhilfe-ludwigshafen.de \
-mysql \
+mysql $protocol \
 	--user=igelhilfe \
-	--password="'$(getpass machine=mysql://localhost login=igelhilfe)'" \
+	--password="$(getpass machine=mysql://localhost login=igelhilfe)" \
 	--database=igel-in-lu \
 	--skip-column-names <<"EOF"
 SELECT
