@@ -9,6 +9,9 @@ cd "$scriptdir"
 rsync -rtv \
 	--chmod=a+rw,g+rw,o+r \
 	--exclude=.git* \
+	--exclude=*.pdn \
+	--exclude=*.ppj \
+	--exclude=*.ppw \
 	--exclude=*.sh \
 	--exclude=*.sql \
 	--exclude=backup \
