@@ -60,7 +60,7 @@ VALUES
 ( 7, NULL, @m, @yel, @non, NULL, NULL),
 ( 8, NULL, @m, @yel, @yel, NULL, NULL),
 ( 9, NULL, @f, @red, @non, NULL, NULL),
-(10, NULL, @u, @non, @lil, NULL, NULL),
+(10, NULL, @m, @non, @lil, NULL, NULL),
 (11, NULL, @f, @lil, @non, 2019, 'Emma'),
 (12, NULL, @u, @non, @whi, NULL, NULL),
 (13, NULL, @u, @whi, @non, NULL, NULL),
