@@ -41,8 +41,8 @@ CREATE TABLE `hedgehogs`
 	`id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`gender` ENUM ('UNKNOWN', 'FEMALE', 'MALE') DEFAULT 'UNKNOWN',
 	`parent` INTEGER DEFAULT NULL,
-	`marker-1` VARCHAR(4) DEFAULT '0000',
-	`marker-2` VARCHAR(4) DEFAULT '0000',
+	`marker1` VARCHAR(4) DEFAULT '0000',
+	`marker2` VARCHAR(4) DEFAULT '0000',
 	`birth` INTEGER,
 	`notes` VARCHAR(255)
 ) CHARACTER SET=utf8;
@@ -59,7 +59,7 @@ CREATE TABLE `discoveries`
 	FOREIGN KEY(`hedgehog`) REFERENCES `hedgehogs`(`id`)
 ) CHARACTER SET=utf8;
 
-INSERT INTO `hedgehogs`(`id`, `parent`, `gender`, `marker-1`, `marker-2`, `birth`, `notes`)
+INSERT INTO `hedgehogs`(`id`, `parent`, `gender`, `marker1`, `marker2`, `birth`, `notes`)
 VALUES
 ( 2, NULL, @f, @non, @non, NULL, NULL),
 ( 3, NULL, @m, @non, @non, NULL, NULL),
@@ -370,7 +370,7 @@ SELECT
 	`discoveries`.`notes`,
 	`gender`,
 	`birth`,
-	CONCAT(`marker-1`, '-', `marker-2`) AS `marker`,
+	CONCAT(`marker1`, '-', `marker2`) AS `marker`,
 	`hedgehogs`.`notes`
 FROM
 	`discoveries`
