@@ -79,6 +79,22 @@ select .ff9f { background-color: #f9f; }
 select .f0ff { background-color: #0ff; }
 select .ffff { background-color: #fff; }
 
+form div
+{
+	padding: 0.2em;
+}
+
+form div select:first-child
+{
+	margin-left: 1em;
+}
+
+.submit
+{
+	margin-top: 1em;
+	text-align: center;
+}
+
 .sidebar-item
 {
 	width:100%;
@@ -131,6 +147,12 @@ select .ffff { background-color: #fff; }
 	box-shadow: 3px 3px 6px 0px rgba(32,32,32,1);
 }
 
+#sidebar > div
+{
+	padding: 0.5em;
+	font-weight: bold;
+}
+
 /* Always set the map height explicitly to define the size of the
  *  div element that contains the map. */
 #map
@@ -149,58 +171,70 @@ select .ffff { background-color: #fff; }
 
 <div style="display:none" id="sidebar">
 	<button onclick="closeSidebar()" class="sidebar-item">Close &times;</button>
+	<div>Filter anwenden:</div>
 	<form style="padding: .5em">
-	<div>
-		<select id="timespan">
-			<option value="">Alle</option>
-			<option value="-1d">Gestern</option>
-			<option value="-2d">Vorgestern</option>
-			<option value="-3d">Letzte 3 Tage</option>
-			<option value="-1w">Letzte Woche</option>
-			<option value="-1m">Letzer Monat</option>
-			<option value="-2m">Letzte 2 Monate</option>
-			<option value="-3m">Letzte 3 Monate</option>
-			<option value="2019">2019</option>
-			<option value="2020">2020</option>
-		</select>
-	<div>
-	</div>
-		<select id="marker1">
-			<option value="">alle</option>
-			<option value="0000" class="none">ohne</option>
-			<option value="ff00" class="ff00">rot</option>
-			<option value="ff90" class="ff90">orange</option>
-			<option value="fff0" class="fff0">gelb</option>
-			<option value="f3f0" class="f3f0">grün</option>
-			<option value="f00f" class="f00f">blau</option>
-			<option value="fc0f" class="fc0f">lila</option>
-			<option value="ff9f" class="ff9f">rosa</option>
-			<option value="f0ff" class="f0ff">cyan</option>
-			<option value="ffff" class="ffff">weiß</option>
-		</select>
-		<select id="marker2">
-			<option value="">alle</option>
-			<option value="0000" class="none">ohne</option>
-			<option value="ff00" class="ff00">rot</option>
-			<option value="ff90" class="ff90">orange</option>
-			<option value="fff0" class="fff0">gelb</option>
-			<option value="f3f0" class="f3f0">grün</option>
-			<option value="f00f" class="f00f">blau</option>
-			<option value="fc0f" class="fc0f">lila</option>
-			<option value="ff9f" class="ff9f">rosa</option>
-			<option value="f0ff" class="f0ff">cyan</option>
-			<option value="ffff" class="ffff">weiß</option>
-		</select>
-	</div>
-	<div>
-		<select id="condition">
-			<option value="">alle</option>
-			<option value="healthy">gesund</option>
-			<option value="needy">hilfsbedürftig</option>
-			<option value="dead">tot</option>
-		</select>
-	</div>
-	<input type="submit"/>
+		<div class="cell">
+			<label for="timespan">Zeitspanne</label>
+		</div>
+		<div class="cell">
+			<select id="timespan">
+				<option value="">Alle</option>
+				<option value="-1d">Gestern</option>
+				<option value="-2d">Vorgestern</option>
+				<option value="-3d">Letzte 3 Tage</option>
+				<option value="-1w">Letzte Woche</option>
+				<option value="-1m">Letzer Monat</option>
+				<option value="-2m">Letzte 2 Monate</option>
+				<option value="-3m">Letzte 3 Monate</option>
+				<option value="2019">2019</option>
+				<option value="2020">2020</option>
+			</select>
+		</div>
+		<div class="cell">
+			<label for="marker1">Markierung</label>
+		</div>
+		<div class="cell">
+			<select id="marker1">
+				<option value="">alle</option>
+				<option value="0000" class="none">ohne</option>
+				<option value="ff00" class="ff00">rot</option>
+				<option value="ff90" class="ff90">orange</option>
+				<option value="fff0" class="fff0">gelb</option>
+				<option value="f3f0" class="f3f0">grün</option>
+				<option value="f00f" class="f00f">blau</option>
+				<option value="fc0f" class="fc0f">lila</option>
+				<option value="ff9f" class="ff9f">rosa</option>
+				<option value="f0ff" class="f0ff">cyan</option>
+				<option value="ffff" class="ffff">weiß</option>
+			</select>
+			<select id="marker2">
+				<option value="">alle</option>
+				<option value="0000" class="none">ohne</option>
+				<option value="ff00" class="ff00">rot</option>
+				<option value="ff90" class="ff90">orange</option>
+				<option value="fff0" class="fff0">gelb</option>
+				<option value="f3f0" class="f3f0">grün</option>
+				<option value="f00f" class="f00f">blau</option>
+				<option value="fc0f" class="fc0f">lila</option>
+				<option value="ff9f" class="ff9f">rosa</option>
+				<option value="f0ff" class="f0ff">cyan</option>
+				<option value="ffff" class="ffff">weiß</option>
+			</select>
+		</div>
+		<div class="cell">
+			<label for="condition">Zustand</label>
+		</div>
+		<div class="cell">
+			<select id="condition">
+				<option value="">alle</option>
+				<option value="healthy">gesund</option>
+				<option value="needy">hilfsbedürftig</option>
+				<option value="dead">tot</option>
+			</select>
+		</div>
+		<div class="submit">
+			<input type="submit"/>
+		</div>
 	</form>
 </div>
 
