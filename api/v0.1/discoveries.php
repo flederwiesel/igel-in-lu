@@ -11,6 +11,7 @@ $query = <<<SQL
 		`lon`,
 		`hedgehog`,
 		`gender`,
+		`hedgehogs`.`notes` AS `notes`,
 		CONCAT(`marker1`, '-', `marker2`) AS `marker`
 	FROM `discoveries`
 	INNER JOIN `hedgehogs` ON `hedgehogs`.`id` = `discoveries`.`hedgehog`
@@ -31,6 +32,7 @@ try
 				"hedgehog" => $row->hedgehog,
 				"condition" => $row->condition,
 				"gender" => $row->gender,
+				"notes" => $row->notes,
 				"marker" => "$row->marker"
 			),
 			"geometry" => (object)array(

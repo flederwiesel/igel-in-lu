@@ -144,7 +144,7 @@ function initMap()
 			var marker = event.feature.getProperty("marker");
 			var gender = event.feature.getProperty("gender");
 			var birth = event.feature.getProperty("birth");
-			var desc = event.feature.getProperty("description");
+			var notes = event.feature.getProperty("notes");
 
 			div = "<div style='margin: 0 1em'>";
 			div += timestamp;
@@ -172,10 +172,10 @@ function initMap()
 				div += birth;
 			}
 
-			if (desc)
+			if (notes)
 			{
-				desc = "<div>" + desc + "</div>";
-				div += desc;
+				notes = "<div>" + notes + "</div>";
+				div += notes;
 			}
 
 			if (marker)
