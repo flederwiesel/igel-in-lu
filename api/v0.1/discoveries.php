@@ -2,6 +2,76 @@
 
 require_once("lib/database.php");
 
+$where = NULL;
+$params = [];
+
+if (isset($_GET["span"]))
+{
+	$span = $_GET["span"];
+
+	if ("-" == substr($span, 0, 1))
+	{
+		if (sscanf(substr($span, 1), "%u%[dwmy]", $n, $interval) == 2)
+		{
+			switch ($interval)
+			{
+			case "d":
+				$interval = "DAY";
+				break;
+
+			case "w":
+				$interval = "WEEK";
+				break;
+
+			case "m":
+				$interval = "MONTH";
+				break;
+
+			case "y":
+				$interval = "YEAR";
+				break;
+
+			default:
+				$interval = NULL;
+				break;
+			}
+
+			if ($interval)
+			{
+				$where .= $where ? " AND" : "WHERE";
+				$where .= " `timestamp` > DATE_SUB(NOW(), INTERVAL $n $interval)";
+			}
+		}
+	}
+	else
+	{
+		if (sscanf($span, "%D", $y) == 1)
+		{
+			$where .= $where ? " AND" : "WHERE";
+			$where .= " `timestamp` LIKE '$y-%'";
+		}
+	}
+}
+
+if (isset($_GET["marker"]))
+{
+	if (is_array($_GET["marker"]))
+	{
+		$n = 0;
+
+		foreach ($_GET["marker"] as $marker)
+		{
+			if (ctype_xdigit($marker))
+			{
+				$n++;
+				$where .= $where ? " AND" : "WHERE";
+				$where .= " marker$n = :marker$n";
+				$params["marker$n"] = $marker;
+			}
+		}
+	}
+}
+
 $query = <<<SQL
 	/*[Q1]*/
 	SELECT
@@ -15,13 +85,14 @@ $query = <<<SQL
 		CONCAT(`marker1`, '-', `marker2`) AS `marker`
 	FROM `discoveries`
 	INNER JOIN `hedgehogs` ON `hedgehogs`.`id` = `discoveries`.`hedgehog`
+	$where
 	ORDER BY `timestamp`
 SQL;
 
 try
 {
 	$st = $db->prepare($query);
-	$st->execute();
+	$st->execute($params);
 
 	while ($row = $st->fetch(PDO::FETCH_OBJ))
 	{

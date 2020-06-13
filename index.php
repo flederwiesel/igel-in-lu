@@ -50,30 +50,152 @@ else
 </head>
 <body>
 <style>
+
+body
+{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, Sans Serif
+}
+
+h1
+{
+	display: inline;
+	font-size: 24pt;
+	width: inherit;
+	padding: 0.2em 0;
+	page-break-inside: avoid;
+}
+
+select .none { background-color: #EEBF9E; }
+select .ff00 { background-color: #f00; color: #fff; }
+select .ff90 { background-color: #f90; }
+select .fff0 { background-color: #ff0; }
+select .f3f0 { background-color: #3f0; }
+select .f00f { background-color: #00f; color: #fff; }
+select .fc0f { background-color: #c0f; color: #fff; }
+select .ff9f { background-color: #f9f; }
+select .f0ff { background-color: #0ff; }
+select .ffff { background-color: #fff; }
+
+.sidebar-item
+{
+	width:100%;
+	display:block;
+	padding: 0.5em;
+	text-align:right;
+	border:none;
+}
+
+#header
+{
+	width: 100%;
+	display: table;
+}
+
+#header *
+{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#header > span
+{
+	background: white;
+}
+
+#hamburger
+{
+	width: 1.2em;
+	margin: 0 .05em;
+	padding: 0;
+	border: none;
+	cursor: pointer;
+	font-size: 18pt;
+	font-weight: bold;
+	background: white;
+	text-align: left;
+}
+
+#sidebar
+{
+	height:100%;
+	background-color:#fff;
+	position:fixed!important;
+	z-index:1;
+	overflow:auto
+	border-right:1px solid #ccc!important
+	-webkit-box-shadow: 3px 3px 6px 0px rgba(32,32,32,1);
+	-moz-box-shadow: 3px 3px 6px 0px rgba(32,32,32,1);
+	box-shadow: 3px 3px 6px 0px rgba(32,32,32,1);
+}
+
 /* Always set the map height explicitly to define the size of the
  *  div element that contains the map. */
 #map
 {
 	height: 100%;
 }
-/* Optional: Makes the sample page fill the window. */
-html, body
-{
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	font-family: Arial, Helvetica, sans-serif;
-}
-#header
-{
-	width: 100%;
-	display: table;
-}
+
 </style>
 
 <div id="header">
-	<h1 style = "margin: 0.1em 0">Igelhilfe Ludwigshafen</h1>
+	<span>
+		<input id="hamburger" type="submit" value="&#9776;" onclick="toggleSidebar()"/>
+	</span>
+	<h1>Igelhilfe&nbsp;Ludwigshafen</h1>
 </div>
+
+<div style="display:none" id="sidebar">
+	<button onclick="closeSidebar()" class="sidebar-item">Close &times;</button>
+	<form style="padding: .5em">
+	<div>
+		<select id="timespan">
+			<option value="">Alle</option>
+			<option value="-1d">Gestern</option>
+			<option value="-2d">Vorgestern</option>
+			<option value="-3d">Letzte 3 Tage</option>
+			<option value="-1w">Letzte Woche</option>
+			<option value="-1m">Letzer Monat</option>
+			<option value="-2m">Letzte 2 Monate</option>
+			<option value="-3m">Letzte 3 Monate</option>
+			<option value="2019">2019</option>
+			<option value="2020">2020</option>
+		</select>
+	<div>
+	</div>
+		<select id="marker1">
+			<option value="">alle</option>
+			<option value="0000" class="none">ohne</option>
+			<option value="ff00" class="ff00">rot</option>
+			<option value="ff90" class="ff90">orange</option>
+			<option value="fff0" class="fff0">gelb</option>
+			<option value="f3f0" class="f3f0">grün</option>
+			<option value="f00f" class="f00f">blau</option>
+			<option value="fc0f" class="fc0f">lila</option>
+			<option value="ff9f" class="ff9f">rosa</option>
+			<option value="f0ff" class="f0ff">cyan</option>
+			<option value="ffff" class="ffff">weiß</option>
+		</select>
+		<select id="marker2">
+			<option value="">alle</option>
+			<option value="0000" class="none">ohne</option>
+			<option value="ff00" class="ff00">rot</option>
+			<option value="ff90" class="ff90">orange</option>
+			<option value="fff0" class="fff0">gelb</option>
+			<option value="f3f0" class="f3f0">grün</option>
+			<option value="f00f" class="f00f">blau</option>
+			<option value="fc0f" class="fc0f">lila</option>
+			<option value="ff9f" class="ff9f">rosa</option>
+			<option value="f0ff" class="f0ff">cyan</option>
+			<option value="ffff" class="ffff">weiß</option>
+		</select>
+	</div>
+	<input type="submit"/>
+	</form>
+</div>
+
 <div id="map"></div>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3&key=&callback=initMap&language=de&region=DE" async defer></script>
@@ -210,6 +332,58 @@ function resizeMap()
 }
 
 window.addEventListener("resize", resizeMap);
+
+</script>
+
+<script>
+
+function toggleSidebar() {
+	var sidebar = document.getElementById("sidebar");
+
+	if ("block" == sidebar.style.display)
+		sidebar.style.display = "none";
+	else
+		sidebar.style.display = "block";
+}
+
+function openSidebar() {
+	document.getElementById("sidebar").style.display = "block";
+}
+
+function closeSidebar() {
+	document.getElementById("sidebar").style.display = "none";
+}
+
+var form = document.getElementsByTagName("form")[0];
+
+form.addEventListener("submit", function(event)
+{
+	event.preventDefault();
+
+	var query;
+	var timespan = document.getElementById("timespan");
+
+	query = "?span=" + timespan.options[timespan.selectedIndex].value;
+
+	[ 1, 2 ]. forEach( function(item, index)
+	{
+		var marker = document.getElementById("marker" + item);
+		var colour = marker.options[marker.selectedIndex].value
+
+		query += "&marker[]=" + marker.options[marker.selectedIndex].value;
+	});
+
+	map.data.forEach(function(feature) {
+		map.data.remove(feature);
+	});
+
+	map.data.loadGeoJson("<?php echo "$api/discoveries.php"; ?>" + query);
+
+	if (infowindow)
+		infowindow.close();
+
+	closeSidebar();
+});
 
 </script>
 
