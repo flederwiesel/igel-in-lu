@@ -1,7 +1,9 @@
 <?php
 
-if ("localhost" == $_SERVER["SERVER_NAME"])
-	header("Access-Control-Allow-Origin: *");
+$host = $_SERVER['HTTP_HOST'];
+$host = $_SERVER["SERVER_NAME"];
+$path = dirname($_SERVER["SCRIPT_NAME"]);
+$api = "https://$host$path/api/v0.1";
 
 /******************************************************************************
  * detect device type
@@ -129,12 +131,7 @@ function initMap()
 		}
 	);
 
-<?php
-	$host = $_SERVER["SERVER_NAME"];
-	$path = dirname($_SERVER["SCRIPT_NAME"]);
-	$url = "https://$host$path/api/v0.1/discoveries.php";
-?>
-	map.data.loadGeoJson("<?php echo $url; ?>");
+	map.data.loadGeoJson("<?php echo "$api/discoveries.php"; ?>");
 
 	// When the user clicks, open an infowindow
 	map.data.addListener('click',
