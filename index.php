@@ -361,16 +361,24 @@ form.addEventListener("submit", function(event)
 	event.preventDefault();
 
 	var query;
-	var timespan = document.getElementById("timespan");
+	var timespan;
+	var marker;
 
-	query = "?span=" + timespan.options[timespan.selectedIndex].value;
+	query = "";
+
+	timespan = document.getElementById("timespan");
+	timespan = timespan.options[timespan.selectedIndex].value;
+
+	if (timespan)
+		query += (query.length ? "&" : "?") + "span=" + timespan;
 
 	[ 1, 2 ]. forEach( function(item, index)
 	{
-		var marker = document.getElementById("marker" + item);
-		var colour = marker.options[marker.selectedIndex].value
+		marker = document.getElementById("marker" + item);
+		marker = marker.options[marker.selectedIndex].value
 
-		query += "&marker[]=" + marker.options[marker.selectedIndex].value;
+		if (marker)
+			query += (query.length ? "&" : "?") + "marker[]=" + marker;
 	});
 
 	map.data.forEach(function(feature) {
