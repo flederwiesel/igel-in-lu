@@ -32,6 +32,7 @@ EOF
 rsync -rtv \
 	--chmod=a+rw,g+rw,o+r \
 	--exclude=.git* \
+	--exclude=*.dsk \
 	--exclude=*.pdn \
 	--exclude=*.ppj \
 	--exclude=*.ppw \
