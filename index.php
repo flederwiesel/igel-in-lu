@@ -192,6 +192,14 @@ select .ffff { background-color: #fff; }
 			<option value="ffff" class="ffff">weiß</option>
 		</select>
 	</div>
+	<div>
+		<select id="condition">
+			<option value="">alle</option>
+			<option value="healthy">gesund</option>
+			<option value="needy">hilfsbedürftig</option>
+			<option value="dead">tot</option>
+		</select>
+	</div>
 	<input type="submit"/>
 	</form>
 </div>
@@ -363,6 +371,7 @@ form.addEventListener("submit", function(event)
 	var query;
 	var timespan;
 	var marker;
+	var condition;
 
 	query = "";
 
@@ -380,6 +389,12 @@ form.addEventListener("submit", function(event)
 		if (marker)
 			query += (query.length ? "&" : "?") + "marker[]=" + marker;
 	});
+
+	condition = document.getElementById("condition");
+	condition = condition.options[condition.selectedIndex].value
+
+	if (condition)
+		query += (query.length ? "&" : "?") + "condition=" + condition;
 
 	map.data.forEach(function(feature) {
 		map.data.remove(feature);

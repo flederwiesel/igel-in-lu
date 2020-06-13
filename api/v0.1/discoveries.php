@@ -72,6 +72,34 @@ if (isset($_GET["marker"]))
 	}
 }
 
+if (isset($_GET["condition"]))
+{
+	switch ($_GET["condition"])
+	{
+	case "healthy":
+		$condition = "HEALTHY";
+		break;
+
+	case "needy":
+		$condition = "NEEDY";
+		break;
+
+	case "dead":
+		$condition = "DEAD";
+		break;
+
+	default:
+		$condition = NULL;
+	}
+
+	if ($condition)
+	{
+		$where .= $where ? " AND" : "WHERE";
+		$where .= " `condition` = :condition";
+		$params["condition"] = $condition;
+	}
+}
+
 $query = <<<SQL
 	/*[Q1]*/
 	SELECT
