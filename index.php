@@ -233,6 +233,7 @@ form div select:first-child
 			</select>
 		</div>
 		<div class="submit">
+			<div><input type="reset"/></div>
 			<input type="submit"/>
 		</div>
 	</form>
