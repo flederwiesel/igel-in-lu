@@ -232,6 +232,9 @@ form div select:first-child
 				<option value="dead">tot</option>
 			</select>
 		</div>
+		<div class="cell">
+			<input type="checkbox" id="nozoom">Zoom beibehalten
+		</div>
 		<div class="submit">
 			<div><input type="reset"/></div>
 			<input type="submit"/>
@@ -435,7 +438,22 @@ form.addEventListener("submit", function(event)
 		map.data.remove(feature);
 	});
 
-	map.data.loadGeoJson("<?php echo "$api/discoveries.php"; ?>" + query);
+	map.data.loadGeoJson("<?php echo "$api/discoveries.php"; ?>" + query, "",
+		function(features) {
+			var zoom = !document.getElementById("nozoom").checked;
+
+			if (zoom) {
+				var bounds = new google.maps.LatLngBounds();
+
+				features.forEach(function(feature) {
+					feature.getGeometry().forEachLatLng(function(pos) {
+						bounds.extend(pos);
+					});
+				});
+
+				map.fitBounds(bounds);
+			}
+		});
 
 	if (infowindow)
 		infowindow.close();
