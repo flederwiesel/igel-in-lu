@@ -101,7 +101,7 @@ VALUES
 (49, NULL, @m, @ora, @lil, NULL, NULL),
 (50, NULL, @m, @lil, @red, NULL, NULL),
 (51, NULL, @m, @red, @ora, NULL, NULL),
-(52, NULL, @u, @red, @yel, NULL, NULL),
+(52, NULL, @u, @red, @yel, NULL, '#1'),
 (53, NULL, @u, @blu, @lil, NULL, NULL),
 (54, NULL, @m, @lil, @yel, NULL, NULL),
 (55, NULL, @f, @ora, @ora, NULL, NULL),
@@ -114,6 +114,8 @@ VALUES
 (62, NULL, @m, @blu, @yel, NULL, NULL),
 (63, NULL, @m, @non, @non, NULL, 'Stanley'),
 (64, NULL, @f, @red, @red, NULL, NULL),
+(65, NULL, @m, @non, @non, NULL, 'Franz'),
+(66, NULL, @f, @red, @yel, NULL, '#2'),
 
 ( 1, NULL, @u, @non, @non, NULL, NULL);
 
@@ -287,5 +289,8 @@ VALUES
 (165, '2020-06-13 23:10', 49.505708, 8.382780, @h, 62, NULL),
 (166, '2020-06-13 23:10', 49.505708, 8.382780, @h, 61, NULL),
 (167, '2020-06-15 12:40', 49.497049, 8.382164, @d,  1, NULL),
+(168, '2020-06-16 16:00', 49.478333, 8.420144, @n, 65, NULL),
+(169, '2020-06-16 22:35', 49.501848, 8.380990, @h, 66, NULL),
+(170, '2020-06-16 22:45', 49.503463, 8.384737, @h, 51, NULL),
 
 (  1, '2018-08-01 22:30', 49.508580, 8.374523, @h,  1, NULL);
