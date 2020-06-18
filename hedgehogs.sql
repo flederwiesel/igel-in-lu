@@ -1,3 +1,5 @@
+#!/usr/bin/mysql $([ "$(uname -s)" = "Linux" ] || echo \--protocol=TCP) --user=igelhilfe --password="$(getpass machine=mysql://localhost login=igelhilfe)" --default-character-set=utf8 <
+
 DROP DATABASE IF EXISTS `igel-in-lu`;
 CREATE DATABASE `igel-in-lu`;
 USE `igel-in-lu`;
@@ -292,5 +294,6 @@ VALUES
 (168, '2020-06-16 16:00', 49.478333, 8.420144, @n, 65, NULL),
 (169, '2020-06-16 22:35', 49.501848, 8.380990, @h, 66, NULL),
 (170, '2020-06-16 22:45', 49.503463, 8.384737, @h, 51, NULL),
+(171, '2020-06-17 22:35', 49.506410, 8.375696, @h, 57, NULL),
 
 (  1, '2018-08-01 22:30', 49.508580, 8.374523, @h,  1, NULL);
