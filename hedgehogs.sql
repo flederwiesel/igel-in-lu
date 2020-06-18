@@ -4,14 +4,14 @@ USE `igel-in-lu`;
 
 SELECT '0000' INTO @non;
 SELECT 'ff00' INTO @red;
+SELECT 'ff90' INTO @ora;
 SELECT 'fff0' INTO @yel;
 SELECT 'f3f0' INTO @gre;
-SELECT 'f00f' INTO @blu;
-SELECT 'ffff' INTO @whi;
-SELECT 'fc0f' INTO @lil;
-SELECT 'ff90' INTO @ora;
 SELECT 'f0ff' INTO @cya;
+SELECT 'f00f' INTO @blu;
+SELECT 'fc0f' INTO @lil;
 SELECT 'ff9f' INTO @pin;
+SELECT 'ffff' INTO @whi;
 SELECT 'f000' INTO @blk;
 
 SELECT 'HEALTHY' INTO @h;
