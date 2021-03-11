@@ -186,8 +186,10 @@ form div select:first-child
 				<option value="-1m">Letzer Monat</option>
 				<option value="-2m">Letzte 2 Monate</option>
 				<option value="-3m">Letzte 3 Monate</option>
-				<option value="2019">2019</option>
-				<option value="2020">2020</option>
+				<?php $d = date('Y', strtotime ('-3 year')); ?><option value="<?php echo $d; ?>"><?php echo $d; ?></option>
+				<?php $d = date('Y', strtotime ('-2 year')); ?><option value="<?php echo $d; ?>"><?php echo $d; ?></option>
+				<?php $d = date('Y', strtotime ('-1 year')); ?><option value="<?php echo $d; ?>"><?php echo $d; ?></option>
+				<?php $d = date('Y', strtotime ('now')); ?><option value="<?php echo $d; ?>"><?php echo $d; ?></option>
 			</select>
 		</div>
 		<div class="cell">
@@ -365,7 +367,6 @@ function initMap()
 				infowindow.close();
 		}
 	);
-
 }
 
 function resizeMap()
