@@ -442,21 +442,30 @@ form.addEventListener("submit", function(event)
 	});
 
 	map.data.loadGeoJson("<?php echo "$api/discoveries.php"; ?>" + query, "",
-		function(features) {
+
+		function(features)
+		{
 			var zoom = !document.getElementById("nozoom").checked;
 
-			if (zoom) {
+			if (zoom && features.length > 0)
+			{
 				var bounds = new google.maps.LatLngBounds();
 
-				features.forEach(function(feature) {
-					feature.getGeometry().forEachLatLng(function(pos) {
-						bounds.extend(pos);
-					});
-				});
+				features.forEach(
+
+					function(feature)
+					{
+						feature.getGeometry().forEachLatLng(function(pos)
+						{
+							bounds.extend(pos);
+						});
+					}
+				);
 
 				map.fitBounds(bounds);
 			}
-		});
+		}
+	);
 
 	if (infowindow)
 		infowindow.close();
