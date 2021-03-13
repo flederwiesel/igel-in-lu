@@ -420,13 +420,15 @@ form.addEventListener("submit", function(event)
 	if (timespan)
 		query += (query.length ? "&" : "?") + "span=" + timespan;
 
-	[ 1, 2 ]. forEach( function(item, index)
+	query += (query.length ? "&" : "?") + "marker";
+
+	[ 1, 2 ].forEach( function(item, index)
 	{
 		marker = document.getElementById("marker" + item);
 		marker = marker.options[marker.selectedIndex].value
 
 		if (marker)
-			query += (query.length ? "&" : "?") + "marker[]=" + marker;
+			query += (1 == item ? "=" : "-") + marker;
 	});
 
 	condition = document.getElementById("condition");

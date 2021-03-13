@@ -55,19 +55,18 @@ if (isset($_GET["span"]))
 
 if (isset($_GET["marker"]))
 {
-	if (is_array($_GET["marker"]))
-	{
-		$n = 0;
+	$markers = explode("-", $_GET["marker"]);
 
-		foreach ($_GET["marker"] as $marker)
+	$n = 0;
+
+	foreach ($markers as $marker)
+	{
+		if (ctype_xdigit($marker))
 		{
-			if (ctype_xdigit($marker))
-			{
-				$n++;
-				$where .= $where ? " AND" : "WHERE";
-				$where .= " marker$n = :marker$n";
-				$params["marker$n"] = $marker;
-			}
+			$n++;
+			$where .= $where ? " AND" : "WHERE";
+			$where .= " marker$n = :marker$n";
+			$params["marker$n"] = $marker;
 		}
 	}
 }
