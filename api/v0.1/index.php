@@ -94,19 +94,19 @@ function curl($params)
 	<h5>Parameters:</h5>
 	<div>
 		<pre class="request-param"><span style="font-style:italic">marker</span> argb-argb</pre>
-			<div class="param-desc">A combination of argb color specifiers as head-tail.
-				If no marker is specified, the query matches all markers.</div>
+		<div class="param-desc">A combination of argb color specifiers as head-tail.
+			If no marker is specified, the query matches all markers.</div>
 
 		<pre class="request-param"><span style="font-style:italic">condition</span> healthy|needy|dead</pre>
-			<div class="param-desc">Condition how the hedgehog has been discovered. Unknown values are
-				silently ignored and can therefore lead to huge amounts of data being returned.</div>
+		<div class="param-desc">Condition how the hedgehog has been discovered. Unknown values are
+			silently ignored and can therefore lead to huge amounts of data being returned.</div>
 
 		<pre class="request-param"><span style="font-style:italic">span</span> <span class="inline-code">-%u%[dwmy]|%Y</span></pre>
-			<div class="param-desc">Relative or absolute time span, where <span class="inline-code">%u</span> is an unsigned integer,
-				specifying a timespan relative to the time of query,
-				<span class="inline-code">%[dwmy]</span> if one of the characters representing day, week, month or year.
-				Alternatively, you can use <span class="inline-code">%Y</span> to specify a year.
-				If no marker is specified, the query matches all markers.</div>
+		<div class="param-desc">Relative or absolute time span, where <span class="inline-code">%u</span> is an unsigned integer,
+			specifying a timespan relative to the time of query,
+			<span class="inline-code">%[dwmy]</span> if one of the characters representing day, week, month or year.
+			Alternatively, you can use <span class="inline-code">%Y</span> to specify a year.
+			If no marker is specified, the query matches all markers.</div>
 	</div>
 
 	<h5>Response:</h5>
