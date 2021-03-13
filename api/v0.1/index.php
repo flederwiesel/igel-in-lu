@@ -141,15 +141,15 @@ function curl($params)
 
 	<div>
 		<h5>curl examples:</h5>
-		<pre class="example" style="line-height: 60%; padding: 0.25em 0;"><?php echo curl("discoveries"); ?><br>
-<?php echo curl("discoveries?marker=ff00-ff00"); ?><br>
-<?php echo curl("discoveries?condition=healthy"); ?><br>
-<?php echo curl("discoveries?span=-1d"); ?><br>
-<?php echo curl("discoveries?span=-2w"); ?><br>
-<?php echo curl("discoveries?span=-3m"); ?><br>
-<?php echo curl("discoveries?span=-1y"); ?><br>
-<?php echo curl("discoveries?span=2020"); ?><br>
-<?php echo curl("discoveries?span=2019&marker=0000-ff00&condition=healthy"); ?></pre>
+		<pre class="example"><?php echo curl("discoveries")."\n"; ?>
+<?php echo curl("discoveries?marker=ff00-ff00")."\n"; ?>
+<?php echo curl("discoveries?condition=healthy")."\n"; ?>
+<?php echo curl("discoveries?span=-1d")."\n"; ?>
+<?php echo curl("discoveries?span=-2w")."\n"; ?>
+<?php echo curl("discoveries?span=-3m")."\n"; ?>
+<?php echo curl("discoveries?span=-1y")."\n"; ?>
+<?php echo curl("discoveries?span=2020")."\n"; ?>
+<?php echo curl("discoveries?span=2019&marker=0000-ff00&condition=healthy")."\n"; ?></pre>
 	</div>
 </div>
 
