@@ -1,5 +1,7 @@
 <?php
 
+header("Content-Type: application/json;charset=utf-8");
+
 require_once("lib/database.php");
 
 $where = NULL;
