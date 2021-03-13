@@ -143,7 +143,7 @@ try
 
 	echo json_encode((object)array(
 		"type" => "FeatureCollection",
-		"features" => isset($features) ? $features : "[]"
+		"features" => isset($features) ? $features : []
 		), JSON_NUMERIC_CHECK
 	);
 }
