@@ -1,5 +1,3 @@
-#!/usr/bin/mysql $([ "$(uname -s)" = "Linux" ] || echo \--protocol=TCP) --user=igelhilfe --password="$(getpass machine=mysql://localhost login=igelhilfe)" --default-character-set=utf8 <
-
 DROP DATABASE IF EXISTS `igel-in-lu`;
 CREATE DATABASE `igel-in-lu`;
 USE `igel-in-lu`;
@@ -29,6 +27,14 @@ SELECT    'MALE' INTO @m;
 -- https://dev.mysql.com/doc/refman/5.7/en/time-zone-support.html#time-zone-installation
 SET time_zone = 'Europe/Berlin';
 
+CREATE TABLE `colours`
+(
+	`value` VARCHAR(4) DEFAULT '0000',
+	`name` VARCHAR(32) NOT NULL,
+	`weight` INTEGER NOT NULL DEFAULT 666,
+	CONSTRAINT `pk:value` PRIMARY KEY(`value`)
+) CHARACTER SET=utf8;
+
 CREATE TABLE `hedgehogs`
 (
 	`id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -51,6 +57,19 @@ CREATE TABLE `discoveries`
 	`notes` TEXT,
 	FOREIGN KEY(`hedgehog`) REFERENCES `hedgehogs`(`id`)
 ) CHARACTER SET=utf8;
+
+INSERT INTO `colours`(`value`, `name`, `weight`)
+VALUES
+('0000', 'ohne', 0),
+('ff00', 'rot', 10),
+('ff90', 'orange', 20),
+('fff0', 'gelb', 30),
+('f3f0', 'grün', 40),
+('f3cc', 'türkis', 50),
+('f00f', 'blau', 60),
+('fc0f', 'lila', 70),
+('ff9f', 'rosa', 80),
+('ffff', 'weiß', 90);
 
 INSERT INTO `hedgehogs`(`id`, `parent`, `gender`, `marker1`, `marker2`, `birth`, `notes`)
 VALUES

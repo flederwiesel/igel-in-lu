@@ -82,9 +82,13 @@ function curl($params)
 <div style="margin-bottom: 2em"><?php echo "$url"; ?> may not be called directly.</div>
 
 <div>The following API calls are available:
+<ul>
+	<li><a href="#discoveries"><pre>GET  discoveries</pre></a></li>
+	<li><a href="#colours"><pre>GET  colours</pre></a></li>
+</ul>
 
 <hr>
-<div>
+<div id="discoveries">
 	<h5>Request:</h5>
 	<div>
 		<pre class="request">GET <?php echo api("discoveries"); ?></pre>
@@ -139,8 +143,8 @@ function curl($params)
 		</div>
 	</div>
 
+	<h5>curl examples:</h5>
 	<div>
-		<h5>curl examples:</h5>
 		<pre class="example"><?php echo curl("discoveries")."\n"; ?>
 <?php echo curl("discoveries?marker=ff00-ff00")."\n"; ?>
 <?php echo curl("discoveries?condition=healthy")."\n"; ?>
@@ -150,6 +154,38 @@ function curl($params)
 <?php echo curl("discoveries?span=-1y")."\n"; ?>
 <?php echo curl("discoveries?span=2020")."\n"; ?>
 <?php echo curl("discoveries?span=2019&marker=0000-ff00&condition=healthy")."\n"; ?></pre>
+	</div>
+</div>
+
+<hr>
+<div id="colours">
+	<h5>Request:</h5>
+	<div>
+		<pre class="request">GET <?php echo api("colours"); ?></pre>
+		<div class="param-desc">Get list of colours.</div>
+	</div>
+
+	<h5>Parameters:</h5>
+	<div>
+		<div class="param-desc">None.</div>
+	</div>
+
+	<h5>Response:</h5>
+	<div>
+		<div>A JSON array containing colour objects, containing of name,
+			argb value and weight, sorted by weight.
+			<pre class="response">[
+  {
+    "name": "0000",
+    "value": "ohne",
+    "weight":  "100"
+  }
+]</pre>
+		</div>
+	</div>
+	<h5>curl examples:</h5>
+	<div>
+		<pre class="example"><?php echo curl("colours"); ?></pre>
 	</div>
 </div>
 

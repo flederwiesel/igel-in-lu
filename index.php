@@ -1,5 +1,7 @@
 <?php
 
+require_once("$_SERVER[DOCUMENT_ROOT]/lib/curl.php");
+
 $host = $_SERVER['HTTP_HOST'];
 $host = $_SERVER["SERVER_NAME"];
 $path = dirname($_SERVER["SCRIPT_NAME"]);
@@ -28,6 +30,12 @@ else
 
 	unset($device);
 }
+
+$req = new curl;
+
+$req->exec("$api/v0.1/colours", $json);
+
+$colours = json_decode($json);
 
 ?>
 <!DOCTYPE html>
@@ -199,29 +207,17 @@ form div select:first-child
 		<div class="cell">
 			<select id="marker1">
 				<option value="">alle</option>
-				<option value="0000" class="argb-none">ohne</option>
-				<option value="ff00" class="argb-ff00">rot</option>
-				<option value="ff90" class="argb-ff90">orange</option>
-				<option value="fff0" class="argb-fff0">gelb</option>
-				<option value="f3f0" class="argb-f3f0">grün</option>
-				<option value="f00f" class="argb-f00f">blau</option>
-				<option value="fc0f" class="argb-fc0f">lila</option>
-				<option value="ff9f" class="argb-ff9f">rosa</option>
-				<option value="f0ff" class="argb-f0ff">cyan</option>
-				<option value="ffff" class="argb-ffff">weiß</option>
+				<?php
+					foreach ($colours as $c)
+						echo "<option value=\"{$c->value}\" class=\"argb-{$c->value}\">{$c->name}</option>\n";
+				?>
 			</select>
 			<select id="marker2">
 				<option value="">alle</option>
-				<option value="0000" class="argb-none">ohne</option>
-				<option value="ff00" class="argb-ff00">rot</option>
-				<option value="ff90" class="argb-ff90">orange</option>
-				<option value="fff0" class="argb-fff0">gelb</option>
-				<option value="f3f0" class="argb-f3f0">grün</option>
-				<option value="f00f" class="argb-f00f">blau</option>
-				<option value="fc0f" class="argb-fc0f">lila</option>
-				<option value="ff9f" class="argb-ff9f">rosa</option>
-				<option value="f0ff" class="argb-f0ff">cyan</option>
-				<option value="ffff" class="argb-ffff">weiß</option>
+				<?php
+					foreach ($colours as $c)
+						echo "<option value=\"{$c->value}\" class=\"argb-{$c->value}\">{$c->name}</option>\n";
+				?>
 			</select>
 		</div>
 		<div class="cell">
