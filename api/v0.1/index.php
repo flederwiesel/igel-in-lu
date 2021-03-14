@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Igel in Ludwigshafen REST API v0.1</title>
-<style>
+<style type="text/css">
 body
 {
 	font-family: Arial, Helvetica, Sans Serif;
