@@ -68,17 +68,6 @@ h1
 	page-break-inside: avoid;
 }
 
-select .none { background-color: #EEBF9E; }
-select .ff00 { background-color: #f00; color: #fff; }
-select .ff90 { background-color: #f90; }
-select .fff0 { background-color: #ff0; }
-select .f3f0 { background-color: #3f0; }
-select .f00f { background-color: #00f; color: #fff; }
-select .fc0f { background-color: #c0f; color: #fff; }
-select .ff9f { background-color: #f9f; }
-select .f0ff { background-color: #0ff; }
-select .ffff { background-color: #fff; }
-
 form div
 {
 	padding: 0.2em;
@@ -88,6 +77,18 @@ form div select:first-child
 {
 	margin-left: 1em;
 }
+
+.argb-0000 { background-color: #EEBF9E; }
+.argb-ff00 { background-color: #f00; color: #fff; }
+.argb-ff90 { background-color: #f90; }
+.argb-fff0 { background-color: #ff0; }
+.argb-f3f0 { background-color: #3f0; }
+.argb-f00f { background-color: #00f; color: #fff; }
+.argb-fc0f { background-color: #c0f; color: #fff; }
+.argb-ff9f { background-color: #f9f; }
+.argb-f0ff { background-color: #0ff; }
+.argb-f3cc { background-color: #3cc; }
+.argb-ffff { background-color: #fff; }
 
 .submit
 {
@@ -198,29 +199,29 @@ form div select:first-child
 		<div class="cell">
 			<select id="marker1">
 				<option value="">alle</option>
-				<option value="0000" class="none">ohne</option>
-				<option value="ff00" class="ff00">rot</option>
-				<option value="ff90" class="ff90">orange</option>
-				<option value="fff0" class="fff0">gelb</option>
-				<option value="f3f0" class="f3f0">grün</option>
-				<option value="f00f" class="f00f">blau</option>
-				<option value="fc0f" class="fc0f">lila</option>
-				<option value="ff9f" class="ff9f">rosa</option>
-				<option value="f0ff" class="f0ff">cyan</option>
-				<option value="ffff" class="ffff">weiß</option>
+				<option value="0000" class="argb-none">ohne</option>
+				<option value="ff00" class="argb-ff00">rot</option>
+				<option value="ff90" class="argb-ff90">orange</option>
+				<option value="fff0" class="argb-fff0">gelb</option>
+				<option value="f3f0" class="argb-f3f0">grün</option>
+				<option value="f00f" class="argb-f00f">blau</option>
+				<option value="fc0f" class="argb-fc0f">lila</option>
+				<option value="ff9f" class="argb-ff9f">rosa</option>
+				<option value="f0ff" class="argb-f0ff">cyan</option>
+				<option value="ffff" class="argb-ffff">weiß</option>
 			</select>
 			<select id="marker2">
 				<option value="">alle</option>
-				<option value="0000" class="none">ohne</option>
-				<option value="ff00" class="ff00">rot</option>
-				<option value="ff90" class="ff90">orange</option>
-				<option value="fff0" class="fff0">gelb</option>
-				<option value="f3f0" class="f3f0">grün</option>
-				<option value="f00f" class="f00f">blau</option>
-				<option value="fc0f" class="fc0f">lila</option>
-				<option value="ff9f" class="ff9f">rosa</option>
-				<option value="f0ff" class="f0ff">cyan</option>
-				<option value="ffff" class="ffff">weiß</option>
+				<option value="0000" class="argb-none">ohne</option>
+				<option value="ff00" class="argb-ff00">rot</option>
+				<option value="ff90" class="argb-ff90">orange</option>
+				<option value="fff0" class="argb-fff0">gelb</option>
+				<option value="f3f0" class="argb-f3f0">grün</option>
+				<option value="f00f" class="argb-f00f">blau</option>
+				<option value="fc0f" class="argb-fc0f">lila</option>
+				<option value="ff9f" class="argb-ff9f">rosa</option>
+				<option value="f0ff" class="argb-f0ff">cyan</option>
+				<option value="ffff" class="argb-ffff">weiß</option>
 			</select>
 		</div>
 		<div class="cell">
@@ -229,9 +230,9 @@ form div select:first-child
 		<div class="cell">
 			<select id="condition">
 				<option value="">alle</option>
-				<option value="healthy">gesund</option>
-				<option value="needy">hilfsbedürftig</option>
-				<option value="dead">tot</option>
+				<option value="healthy" class="argb-f3f0">gesund</option>
+				<option value="needy" class="argb-fff0">hilfsbedürftig</option>
+				<option value="dead" class="argb-ff00">tot</option>
 			</select>
 		</div>
 		<div class="cell">
@@ -472,6 +473,51 @@ form.addEventListener("submit", function(event)
 
 	closeSidebar();
 });
+
+(function()
+{
+	// your page initialization code here
+	// the DOM will be available here
+
+	selects = document.getElementsByTagName("select");
+
+	[...selects].forEach(
+		function(item, index)
+		{
+			item.addEventListener("change", function(event)
+			{
+				select = event.target;
+				select.className = (select.options[select.selectedIndex].className);
+			});
+		}
+	);
+
+	forms = document.getElementsByTagName("form");
+
+	[...forms].forEach
+	(
+		function(item, index)
+		{
+			item.addEventListener("reset",
+			function(event)
+			{
+				selects = item.getElementsByTagName("select");
+
+				[...selects].forEach
+				(
+					function(item, index)
+					{
+						setTimeout(
+							function() {
+								item.className = (item.options[item.selectedIndex].className);
+							}, 0
+						);
+					}
+				);
+			});
+		}
+	);
+})();
 
 </script>
 
