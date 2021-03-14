@@ -9,7 +9,7 @@ SELECT 'ff00' INTO @red;
 SELECT 'ff90' INTO @ora;
 SELECT 'fff0' INTO @yel;
 SELECT 'f3f0' INTO @gre;
-SELECT 'f0ff' INTO @cya;
+SELECT 'f3cc' INTO @tur;
 SELECT 'f00f' INTO @blu;
 SELECT 'fc0f' INTO @lil;
 SELECT 'ff9f' INTO @pin;
