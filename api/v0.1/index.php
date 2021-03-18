@@ -87,6 +87,9 @@ function curl($params)
 	<li><a href="#colours"><pre>GET  colours</pre></a></li>
 </ul>
 
+<div>For <a href="#errors">error responses</a>, see end of this document.
+</div>
+
 <hr>
 <div id="discoveries">
 	<h5>Request:</h5>
@@ -190,9 +193,24 @@ function curl($params)
 </div>
 
 <hr>
-<div>On error, all API calls return:
-	<pre class="error">{ "error": "$error" }</pre>
-</div>
+	<h5 id="errors">Error response:</h5>
+
+	<div>Api calls returning GeoJSON will return error messages embedded in
+	GeoJSON as well, where the "geometry" member is null and the error message
+	is embedded in the "properties":
+		<pre class="error">{
+  "type": "Feature",
+  "geometry": null,
+  "properties": {
+    "error": "A database error occured. For support, refer to ticket $uuid."
+  }
+}</pre>
+	</div>
+
+	<div>If no GeoJSON is expected and not otherwise specified, API calls return
+	a simple JSON object only containing the error message:
+		<pre class="error">{ "error": "A database error occured. For support, refer to ticket $uuid." }</pre>
+	</div>
 
 </body>
 </html>
