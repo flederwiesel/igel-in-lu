@@ -55,6 +55,8 @@ $colours = json_decode($json);
 	<link rel="icon" type="image/png" href="favicon-96.png" sizes="96x96">
 	<link rel="icon" type="image/svg+xml" href="favicon.svg" sizes="any">
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<script src="lib/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+	<script src="lib/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 </head>
 <body>
 <style>
@@ -247,6 +249,23 @@ form div select:first-child
 
 <script>
 
+function toggleSidebar() {
+	var sidebar = $("#sidebar");
+
+	if ("block" == sidebar.css("display"))
+		sidebar.css("display", "none");
+	else
+		sidebar.css("display", "block");
+}
+
+function openSidebar() {
+	$("#sidebar").css("display", "block");
+}
+
+function closeSidebar() {
+	$("#sidebar").css("display", "none");
+}
+
 var map;
 var infowindow;
 
@@ -375,32 +394,10 @@ function resizeMap()
 		mapdiv.style.height = (window.innerHeight - header.offsetHeight) + "px";
 }
 
-window.addEventListener("resize", resizeMap);
+$(window).on("resize", resizeMap);
 
-</script>
-
-<script>
-
-function toggleSidebar() {
-	var sidebar = document.getElementById("sidebar");
-
-	if ("block" == sidebar.style.display)
-		sidebar.style.display = "none";
-	else
-		sidebar.style.display = "block";
-}
-
-function openSidebar() {
-	document.getElementById("sidebar").style.display = "block";
-}
-
-function closeSidebar() {
-	document.getElementById("sidebar").style.display = "none";
-}
-
-var form = document.getElementsByTagName("form")[0];
-
-form.addEventListener("submit", function(event)
+$("form").submit(
+function(event)
 {
 	event.preventDefault();
 
@@ -470,50 +467,19 @@ form.addEventListener("submit", function(event)
 	closeSidebar();
 });
 
-(function()
-{
-	// your page initialization code here
-	// the DOM will be available here
+$("select").on("change", function() {
+	this.className = this.options[this.selectedIndex].className;
+});
 
-	selects = document.getElementsByTagName("select");
+$("form").on("reset", function(event) {
+	form = $(this);
 
-	[...selects].forEach(
-		function(item, index)
-		{
-			item.addEventListener("change", function(event)
-			{
-				select = event.target;
-				select.className = (select.options[select.selectedIndex].className);
-			});
-		}
-	);
-
-	forms = document.getElementsByTagName("form");
-
-	[...forms].forEach
-	(
-		function(item, index)
-		{
-			item.addEventListener("reset",
-			function(event)
-			{
-				selects = item.getElementsByTagName("select");
-
-				[...selects].forEach
-				(
-					function(item, index)
-					{
-						setTimeout(
-							function() {
-								item.className = (item.options[item.selectedIndex].className);
-							}, 0
-						);
-					}
-				);
-			});
-		}
-	);
-})();
+	setTimeout(function() {
+		form.find('select').each(function(index, item) {
+			item.className = item.options[0].className;
+		});
+	}, 0);
+});
 
 </script>
 
