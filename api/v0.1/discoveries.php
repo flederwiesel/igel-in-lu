@@ -126,27 +126,28 @@ try
 
 	while ($row = $st->fetch(PDO::FETCH_OBJ))
 	{
-		$features[] = (object)array(
+		$features[] = [
 			"type" => "Feature",
-			"properties" => (object)array(
+			"properties" => [
 				"timestamp" => $row->timestamp,
 				"hedgehog" => $row->hedgehog,
 				"condition" => $row->condition,
 				"gender" => $row->gender,
 				"notes" => $row->notes,
 				"marker" => "$row->marker"
-			),
-			"geometry" => (object)array(
+			],
+			"geometry" => [
 				"type" => "Point",
 				"coordinates" => [ $row->lon, $row->lat ]
-			)
-		);
+			]
+		];
 	}
 
-	echo json_encode((object)array(
-		"type" => "FeatureCollection",
-		"features" => isset($features) ? $features : []
-		), JSON_NUMERIC_CHECK
+	echo json_encode(
+		[
+			"type" => "FeatureCollection",
+			"features" => isset($features) ? $features : []
+		], JSON_NUMERIC_CHECK
 	);
 }
 catch (Exception $e)
@@ -159,16 +160,13 @@ catch (Exception $e)
 		   "{$e->getCode()}: {$e->getMessage()}\n".
 		   "{$e->getTraceAsString()}");
 
-	$error = <<<JSON
-{
-	"type": "Feature",
-	"properties": {
-		"error": "A database error occured. For support, refer to ticket $uuid."
-	}
-}
-JSON;
-
-	die("$error");
+	echo json_encode([
+		"type" => "Feature",
+		"geometry" => null,
+		"properties" => [
+			"error" => "A database error occured. For support, refer to ticket $uuid."
+		]
+	]);
 }
 
 ?>
