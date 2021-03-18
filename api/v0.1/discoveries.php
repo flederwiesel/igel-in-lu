@@ -63,9 +63,10 @@ if (isset($_GET["marker"]))
 
 	foreach ($markers as $marker)
 	{
+		++$n;
+
 		if (ctype_xdigit($marker))
 		{
-			$n++;
 			$where .= $where ? " AND" : "WHERE";
 			$where .= " marker$n = :marker$n";
 			$params["marker$n"] = $marker;
