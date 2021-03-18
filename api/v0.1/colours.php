@@ -32,16 +32,9 @@ catch (Exception $e)
 		   "{$e->getCode()}: {$e->getMessage()}\n".
 		   "{$e->getTraceAsString()}");
 
-	$error = <<<JSON
-{
-	"type": "Feature",
-	"properties": {
-		"error": "A database error occured. For support, refer to ticket $uuid."
-	}
-}
-JSON;
-
-	die("$error");
+	echo json_encode([
+		"error" => "A database error occured. For support, refer to ticket $uuid."
+	]);
 }
 
 }
