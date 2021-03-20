@@ -88,17 +88,20 @@ form div select:first-child
 	margin-left: 1em;
 }
 
-.argb-0000 { background-color: #EEBF9E; }
+option.match-all,
+option.add-unknown { background-color: white; color: black; }
+
+.argb-0000 { background-color: #EEBF9E; color: black; }
 .argb-ff00 { background-color: #f00; color: #fff; }
-.argb-ff90 { background-color: #f90; }
-.argb-fff0 { background-color: #ff0; }
-.argb-f3f0 { background-color: #3f0; }
+.argb-ff90 { background-color: #f90; color: black; }
+.argb-fff0 { background-color: #ff0; color: black; }
+.argb-f3f0 { background-color: #3f0; color: black; }
 .argb-f00f { background-color: #00f; color: #fff; }
 .argb-fc0f { background-color: #c0f; color: #fff; }
-.argb-ff9f { background-color: #f9f; }
-.argb-f0ff { background-color: #0ff; }
-.argb-f3cc { background-color: #3cc; }
-.argb-ffff { background-color: #fff; }
+.argb-ff9f { background-color: #f9f; color: black; }
+.argb-f0ff { background-color: #0ff; color: black; }
+.argb-f3cc { background-color: #3cc; color: black; }
+.argb-ffff { background-color: #fff; color: black; }
 
 .submit
 {
@@ -208,14 +211,14 @@ form div select:first-child
 		</div>
 		<div class="cell">
 			<select id="marker1">
-				<option value="">alle</option>
+				<option value="" class="match-all">alle</option>
 				<?php
 					foreach ($colours as $c)
 						echo "<option value=\"{$c->value}\" class=\"argb-{$c->value}\">{$c->name}</option>\n";
 				?>
 			</select>
 			<select id="marker2">
-				<option value="">alle</option>
+				<option value="" class="match-all">alle</option>
 				<?php
 					foreach ($colours as $c)
 						echo "<option value=\"{$c->value}\" class=\"argb-{$c->value}\">{$c->name}</option>\n";
@@ -227,7 +230,7 @@ form div select:first-child
 		</div>
 		<div class="cell">
 			<select id="condition">
-				<option value="">alle</option>
+				<option value="" class="match-all">alle</option>
 				<option value="healthy" class="argb-f3f0">gesund</option>
 				<option value="needy" class="argb-fff0">hilfsbedürftig</option>
 				<option value="dead" class="argb-ff00">tot</option>
