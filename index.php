@@ -337,7 +337,16 @@ function initMap()
 
 	map.data.loadGeoJson("<?php echo "$api/discoveries.php"; ?>");
 
-	// When the user clicks, open an infowindow
+	// When the user clicks on the map, hide sidebar
+	map.addListener("click",
+		function(event)
+		{
+			if ($("#sidebar").is(":visible"))
+				closeSidebar();
+		}
+	);
+
+	// When the user clicks on a marker, open an infowindow
 	map.data.addListener("click",
 		function(event)
 		{
