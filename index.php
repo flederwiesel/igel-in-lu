@@ -88,6 +88,21 @@ form div select:first-child
 	margin-left: 1em;
 }
 
+.hedgehog-info
+{
+	margin: 0 1em;
+}
+
+.hedgehog-info .gender
+{
+	margin-left: 1em;
+}
+
+.hedgehog-info .marker
+{
+	margin-top: 0.5em
+}
+
 option.match-all,
 option.add-unknown { background-color: white; color: black; }
 
@@ -332,17 +347,17 @@ function initMap()
 			var birth = event.feature.getProperty("birth");
 			var notes = event.feature.getProperty("notes");
 
-			div = "<div style='margin: 0 1em'>";
+			div = '<div class="hedgehog-info">';
 			div += timestamp;
 
 			switch (gender)
 			{
 			case "MALE":
-				gender = "<span style = 'margin-left: 1em'>&#x2642;</span>";
+				gender = '<span class="gender">&#x2642;</span>';
 				break;
 
 			case "FEMALE":
-				gender = "<span style = 'margin-left: 1em'>&#x2640;</span>";
+				gender = '<span class="gender">&#x2640;</span>';
 				break;
 
 			default:
@@ -365,7 +380,7 @@ function initMap()
 			}
 
 			if (marker)
-				div += "<div style = 'margin-top: 0.5em'><img src='img/" + marker + ".png'></div>";
+				div += '<div class="marker"><img src="img/' + marker + '.png"></div>';
 
 			div += "</div>";
 
