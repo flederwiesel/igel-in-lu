@@ -485,7 +485,7 @@ function(event)
 	closeSidebar();
 });
 
-$("select").on("change", function() {
+$("select").change(function() {
 	this.className = this.options[this.selectedIndex].className;
 });
 
