@@ -66,7 +66,7 @@ body
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	font-family: Arial, Helvetica, Sans Serif
+	font-family: Arial, Helvetica, Sans Serif;
 }
 
 h1
@@ -83,9 +83,69 @@ form div
 	padding: 0.2em;
 }
 
-form div select:first-child
+form div select:first-child,
+form div input:first-child
 {
 	margin-left: 1em;
+}
+
+button
+{
+	background: #ccc;
+}
+
+#header
+{
+	width: 100%;
+	display: table;
+}
+
+#header *
+{
+	display: table-cell;
+}
+
+#hamburger
+{
+	border: none;
+	background: white;
+	font-size: 18pt;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#sidebar
+{
+	display: none;
+	position: fixed !important;
+	z-index: 1;
+	border-right: 1px solid #ccc!important;
+	height: 100%;
+	background-color: #fff;
+	overflow: auto;
+	box-shadow: 3px 3px 6px 0px rgba(32, 32, 32, 1);
+}
+
+#sidebar .sidebar-header
+{
+	display:block;
+	width:100%;
+	padding: 0.5em;
+	border: none;
+	text-align: right;
+}
+
+#sidebar > div
+{
+	padding: 0.5em;
+	font-weight: bold;
+}
+
+/* Always set the map height explicitly to define the size of the
+ *  div element that contains the map. */
+#map
+{
+	height: 100%;
 }
 
 .hedgehog-info
@@ -124,82 +184,22 @@ option.add-unknown { background-color: white; color: black; }
 	text-align: center;
 }
 
-.sidebar-item
+form :focus
 {
-	width:100%;
-	display:block;
-	padding: 0.5em;
-	text-align:right;
-	border:none;
-}
-
-#header
-{
-	width: 100%;
-	display: table;
-}
-
-#header *
-{
-	display: table-cell;
-	vertical-align: middle;
-}
-
-#header > span
-{
-	background: white;
-}
-
-#hamburger
-{
-	width: 1.2em;
-	margin: 0 .05em;
-	padding: 0;
-	border: none;
-	cursor: pointer;
-	font-size: 18pt;
-	font-weight: bold;
-	background: white;
-	text-align: left;
-}
-
-#sidebar
-{
-	height:100%;
-	background-color:#fff;
-	position:fixed!important;
-	z-index:1;
-	overflow:auto
-	border-right:1px solid #ccc!important
-	-webkit-box-shadow: 3px 3px 6px 0px rgba(32,32,32,1);
-	-moz-box-shadow: 3px 3px 6px 0px rgba(32,32,32,1);
-	box-shadow: 3px 3px 6px 0px rgba(32,32,32,1);
-}
-
-#sidebar > div
-{
-	padding: 0.5em;
-	font-weight: bold;
-}
-
-/* Always set the map height explicitly to define the size of the
- *  div element that contains the map. */
-#map
-{
-	height: 100%;
+	border-radius: 0;
+	outline: dotted 1px !important;
+	box-shadow: 0 0 2em 0.1em #ddd;
 }
 
 </style>
 
 <div id="header">
-	<span>
-		<input id="hamburger" type="submit" value="&#9776;" onclick="toggleSidebar()"/>
-	</span>
+	<input id="hamburger" type="submit" value="&#9776;" onclick="toggleSidebar()"/>
 	<h1>Igelhilfe&nbsp;Ludwigshafen</h1>
 </div>
 
-<div style="display:none" id="sidebar">
-	<button onclick="closeSidebar()" class="sidebar-item">Close &times;</button>
+<div id="sidebar">
+	<button onclick="closeSidebar()" class="sidebar-header">&lt;&lt; Close &times;</button>
 	<div>Filter anwenden:</div>
 	<form style="padding: .5em">
 		<div class="cell">
