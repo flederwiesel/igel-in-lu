@@ -294,16 +294,16 @@ function initMap()
 	infowindow = new google.maps.InfoWindow();
 
 	map = new google.maps.Map(
-		document.getElementById('map'),
+		document.getElementById("map"),
 		{
-			mapTypeId: 'hybrid',
+			mapTypeId: "hybrid",
 			tilt: 0,
 			center: { lat: 49.5053287, lng: 8.3810766 },
 			zoom: 15,
 			mapTypeControl: true,
 			mapTypeControlOptions:
 			{
-				mapTypeIds: [ 'hybrid', 'roadmap', 'terrain' ]
+				mapTypeIds: [ "hybrid", "roadmap", "terrain" ]
 			},
 			scaleControl: true,
 			streetViewControl: false,
@@ -338,7 +338,7 @@ function initMap()
 	map.data.loadGeoJson("<?php echo "$api/discoveries.php"; ?>");
 
 	// When the user clicks, open an infowindow
-	map.data.addListener('click',
+	map.data.addListener("click",
 		function(event)
 		{
 			var timestamp = event.feature.getProperty("timestamp");
@@ -405,8 +405,8 @@ function initMap()
 
 function resizeMap()
 {
-	var header = document.querySelector('#header');
-	var mapdiv = document.querySelector('#map');
+	var header = document.querySelector("#header");
+	var mapdiv = document.querySelector("#map");
 
 	if (window.innerHeight != header.offsetHeight + mapdiv.offsetHeight)
 		mapdiv.style.height = (window.innerHeight - header.offsetHeight) + "px";
@@ -493,7 +493,7 @@ $("form").on("reset", function(event) {
 	form = $(this);
 
 	setTimeout(function() {
-		form.find('select').each(function(index, item) {
+		form.find("select").each(function(index, item) {
 			item.className = item.options[0].className;
 		});
 	}, 0);
